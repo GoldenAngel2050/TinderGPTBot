@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class TinderBoltApp extends MultiSessionTelegramBot {
     public static final String TELEGRAM_BOT_NAME = "goldi_gpt_bot";
     public static final String TELEGRAM_BOT_TOKEN = "7237305081:AAFceyjkPfWLaX2SI8U_ffUkEwqfaqtwxao";
-    public static final String OPEN_AI_TOKEN = "sk-proj-F06209zzjcJv29AqJFKTT3BlbkFJvDQ75eWCoblwtakzM7GR";
+    public static final String OPEN_AI_TOKEN = "";
 
     public TinderBoltApp() {
         super(TELEGRAM_BOT_NAME, TELEGRAM_BOT_TOKEN);
