@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class TinderBoltApp extends MultiSessionTelegramBot {
     public static final String TELEGRAM_BOT_NAME = "goldi_gpt_bot";
-    public static final String TELEGRAM_BOT_TOKEN = "7237305081:AAFceyjkPfWLaX2SI8U_ffUkEwqfaqtwxao";
+    public static final String TELEGRAM_BOT_TOKEN = "";
     public static final String OPEN_AI_TOKEN = "";
 
     public TinderBoltApp() {
@@ -25,8 +25,8 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
 
     @Override
     public void onUpdateEventReceived(Update update) {
-        String massage = getMessageText();
-        if(massage.equals("/start")){
+        String message = getMessageText();
+        if(message.equals("/start")){
             currentMode = DialogMode.MAIN;
             sendPhotoMessage("main");
             String text = loadMessage("main");
@@ -41,7 +41,7 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
             return;
         }
 
-        if(massage.equals("/gpt")){
+        if(message.equals("/gpt")){
             currentMode = DialogMode.GPT;
             sendPhotoMessage("gpt");
             String text = loadMessage("gpt");
@@ -49,9 +49,22 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
             return;
         }
 
+        if(message.equals("/date")){
+            currentMode = DialogMode.DATE;
+            sendPhotoMessage("date");
+            sendTextMessage("Выберите девушку, которую хотите пригласить на свидание");
+            return;
+        }
+
         if(currentMode == DialogMode.GPT){
             String prompt = loadMessage("gpt");
-            String answer = chatGPTService.sendMessage(prompt, massage);
+            String answer = chatGPTService.sendMessage(prompt, message);
+            sendTextMessage(answer);
+            return;
+        }
+
+        if(currentMode == DialogMode.DATE){
+            String answer = chatGPTService.sendMessage("Диалог с девушкой", message);
             sendTextMessage(answer);
             return;
         }
