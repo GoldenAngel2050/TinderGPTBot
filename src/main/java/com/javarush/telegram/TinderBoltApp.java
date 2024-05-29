@@ -118,7 +118,7 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
             me = new UserInfo();
             questionCount = 1;
             sendTextMessage("Сколько вам лет?");
-
+            return;
         }
 
         if(currentMode == DialogMode.PROFILE && !isMessageCommand()){
@@ -127,21 +127,25 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
                     me.age = message;
                     questionCount = 2;
                     sendTextMessage("Кем вы работаете?");
+                    return;
                 }
                 case 2 -> {
                     me.occupation = message;
                     questionCount = 3;
                     sendTextMessage("Есть ли у вас хобби?");
+                    return;
                 }
                 case 3 -> {
                     me.hobby = message;
                     questionCount = 4;
                     sendTextMessage("Что вам не нравится в людях?");
+                    return;
                 }
                 case 4 -> {
                     me.annoys = message;
                     questionCount = 5;
                     sendTextMessage("Цель знакомства?");
+                    return;
                 }
                 case 5 -> {
                     me.goals = message;
@@ -152,6 +156,7 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
                     Message msg = sendTextMessage("Подождите несколько секунд, чат GPT думает...");
                     String answer = chatGPTService.sendMessage(prompt, aboutMyself);
                     updateTextMessage(msg, answer);
+                    return;
                 }
             }
             return;
@@ -172,21 +177,25 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
                     she.name = message;
                     questionCount = 2;
                     sendTextMessage("Сколько ей лет?");
+                    return;
                 }
                 case 2 -> {
                     she.age = message;
                     questionCount = 3;
                     sendTextMessage("Есть ли у неё хобби и какие?");
+                    return;
                 }
                 case 3 -> {
                     she.hobby = message;
                     questionCount = 4;
                     sendTextMessage("Кем она работает?");
+                    return;
                 }
                 case 4 -> {
                     she.occupation = message;
                     questionCount = 5;
                     sendTextMessage("Цели знакомства?");
+                    return;
                 }
                 case 5 -> {
                     she.goals = message;
@@ -195,10 +204,10 @@ public class TinderBoltApp extends MultiSessionTelegramBot {
                     Message msg = sendTextMessage("Подождите несколько секунд, чат GPT думает...");
                     String answer = chatGPTService.sendMessage(prompt, aboutFriend);
                     updateTextMessage(msg, answer);
+                    return;
                 }
             }
             return;
-
         }
 
         sendTextMessage("Приветсвутю, я GoldiGPT");
